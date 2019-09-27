@@ -373,7 +373,8 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
     }
 
     set options(val: any[]) {
-        let opts = this.optionLabel ? ObjectUtils.generateSelectItems(val, this.optionLabel) : val;
+        this.optionValue = this.optionLabel ? (this.optionValue ? this.optionValue : this.optionLabel) : undefined;
+        let opts = this.optionLabel ? ObjectUtils.generateSelectItems(val, this.optionLabel, this.optionValue) : val;
         this._options = opts;
         this.optionsToDisplay = this._options;
         this.updateSelectedOption(this.value);
@@ -418,13 +419,15 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
         if (this.selectedOption != option) {
             this.selectedOption = option;
             this.value = option.value;
+            this.valueObject = option.valueObject;
             this.filled = true;
 
             this.onModelChange(this.value);
             this.updateEditableLabel();
             this.onChange.emit({
                 originalEvent: event.originalEvent,
-                value: this.value
+                value: this.value,
+                valueObject: this.valueObject
             });
 
             if (this.virtualScroll) {
