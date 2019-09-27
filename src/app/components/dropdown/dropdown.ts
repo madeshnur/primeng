@@ -192,6 +192,8 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
     @Input() dropdownIcon: string = 'pi pi-chevron-down';
     
     @Input() optionLabel: string;
+    
+    @Input() optionValue: string;
 
     @Input() autoDisplayFirst: boolean = true;
 
@@ -282,6 +284,8 @@ export class Dropdown implements OnInit,AfterViewInit,AfterContentInit,AfterView
     _options: any[];
     
     value: any;
+    
+    valueObject: any;
     
     onModelChange: Function = () => {};
     
